@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NEXORA TV</title>
+<style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: #080b18;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+header {
+  padding: 22px;
+  background: #11162b;
+  border-bottom: 1px solid #292f50;
+}
+.logo {
+  font-size: 27px;
+  font-weight: bold;
+  color: #a78bfa;
+}
+main { padding: 20px; max-width: 1000px; margin: auto; }
+h2 { color: #c4b5fd; }
+.player {
+  background: #151b30;
+  border: 1px solid #343c60;
+  border-radius: 14px;
+  padding: 35px 15px;
+  text-align: center;
+  margin-bottom: 25px;
+}
+.player video {
+  width: 100%;
+  max-height: 430px;
+  background: black;
+  border-radius: 8px;
+}
+.channels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(135px,1fr));
+  gap: 12px;
+}
+.channel {
+  background: #171e38;
+  border: 1px solid #343c60;
+  padding: 18px 10px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.channel:hover, .channel.active {
+  border-color: #a78bfa;
+  background: #29234b;
+}
+.schedule {
+  margin-top: 25px;
+  padding: 18px;
+  background: #11162b;
+  border-radius: 12px;
+}
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #858da8;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">NEXORA TV</div>
+  <small>YOUR DIGITAL TELEVISION</small>
+</header>
+
+<main>
+  <h2>Teraz na antenie</h2>
+
+  <section class="player">
+    <h2 id="channelName">NEXORA ONE</h2>
+    <video id="video" controls playsinline></video>
+    <p id="status">Kanał testowy – oczekiwanie na transmisję</p>
+  </section>
+
+  <h2>Wybierz kanał</h2>
+  <div class="channels">
+    <button class="channel active" onclick="selectChannel(0)">01<br>NEXORA ONE</button>
+    <button class="channel" onclick="selectChannel(1)">02<br>NEXORA MUSIC</button>
+    <button class="channel" onclick="selectChannel(2)">03<br>NEXORA MOVIES</button>
+    <button class="channel" onclick="selectChannel(3)">04<br>NEXORA WORLD</button>
+  </div>
+
+  <section class="schedule">
+    <h2>Ramówka</h2>
+    <p>Ramówka NEXORA TV</p>
+    <p>Programy zostaną dodane wkrótce.</p>
+  </section>
+</main>
+
+<footer>
+  NEXORA TV © 2026
+</footer>
+
+<script>
+const channels = [
+  "NEXORA ONE",
+  "NEXORA MUSIC",
+  "NEXORA MOVIES",
+  "NEXORA WORLD"
+];
+
+function selectChannel(number) {
+  document.getElementById("channelName").textContent =
+    channels[number];
+
+  document.getElementById("video").pause();
+  document.getElementById("video").removeAttribute("src");
+  document.getElementById("video").load();
+
+  document.getElementById("status").textContent =
+    "Wybrano kanał. Oczekiwanie na transmisję.";
+
+  document.querySelectorAll(".channel").forEach((button, i) => {
+    button.classList.toggle("active", i === number);
+  });
+}
+</script>
+
+</body>
+</html>
